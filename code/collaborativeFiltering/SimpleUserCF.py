@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Wed May  9 10:10:04 2018
 
-@author: Frank
-"""
 
 import os
 import sys

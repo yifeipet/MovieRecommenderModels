@@ -8,13 +8,15 @@ Created on Fri May  4 16:25:39 2018
 import os
 import sys
 sys.path.append(os.path.realpath(os.path.join(os.path.dirname(__file__), '..')))
+
 from MovieLens import MovieLens
 from ContentKNNAlgorithm import ContentKNNAlgorithm
-from Evaluator import Evaluator
+from evaluate import Evaluator
 from surprise import NormalPredictor
 
 import random
 import numpy as np
+
 
 def LoadMovieLensData():
     ml = MovieLens()

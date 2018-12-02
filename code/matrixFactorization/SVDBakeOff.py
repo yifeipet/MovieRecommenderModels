@@ -1,18 +1,12 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu May  3 11:11:13 2018
-
-@author: Frank
-"""
 
 import os
 import sys
 sys.path.append(os.path.realpath(os.path.join(os.path.dirname(__file__), '..')))
 
 from MovieLens import MovieLens
-from surprise import SVD, SVDpp
-from surprise import NormalPredictor
-from Evaluator import Evaluator
+from surprise import SVD, SVDpp, NormalPredictor
+from evaluate import Evaluator
 
 import random
 import numpy as np
