@@ -13,13 +13,14 @@ class MovieLens:
 
     movieID_to_name = {}
     name_to_movieID = {}
-    ratingsPath = '../ml-latest-small/ratings.csv'
-    moviesPath = '../ml-latest-small/movies.csv'
-    
+    datapath = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', '..', 'data'))
+
+    ratingsPath = os.path.join(datapath, 'ratings.csv')
+    moviesPath = os.path.join(datapath, 'movies.csv')
+
     def loadMovieLensLatestSmall(self):
 
         # Look for files relative to the directory we are running from
-        os.chdir(os.path.dirname(sys.argv[0]))
 
         ratingsDataset = 0
         self.movieID_to_name = {}
@@ -119,7 +120,7 @@ class MovieLens:
     
     def getMiseEnScene(self):
         mes = defaultdict(list)
-        with open("LLVisualFeatures13K_Log.csv", newline='') as csvfile:
+        with open(os.path.join(MovieLens.datapath , "LLVisualFeatures13K_Log.csv"), newline='') as csvfile:
             mesReader = csv.reader(csvfile)
             next(mesReader)
             for row in mesReader:
