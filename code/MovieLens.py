@@ -13,7 +13,7 @@ class MovieLens:
 
     movieID_to_name = {}
     name_to_movieID = {}
-    datapath = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', '..', 'data'))
+    datapath = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', 'data'))
 
     ratingsPath = os.path.join(datapath, 'ratings.csv')
     moviesPath = os.path.join(datapath, 'movies.csv')
