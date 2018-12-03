@@ -1,0 +1,43 @@
+Estimating biases using als...
+Computing the cosine similarity matrix...
+Done computing similarity matrix.
+User-User:
+Computing the cosine similarity matrix...
+Done computing similarity matrix.
+Computing the cosine similarity matrix...
+Done computing similarity matrix.
+Gladiator (2000) 4.6
+Raiders of the Lost Ark (Indiana Jones and the Raiders of the Lost Ark) (1981) 4.5
+Forrest Gump (1994) 4.1000000000000005
+Shawshank Redemption, The (1994) 4.1000000000000005
+Matrix, The (1999) 3.6
+Pulp Fiction (1994) 3.5999999999999996
+Seven (a.k.a. Se7en) (1995) 3.5
+Groundhog Day (1993) 3.5
+Silence of the Lambs, The (1991) 3.3000000000000003
+Saving Private Ryan (1998) 3.3
+Inception (2010) 3.3
+
+Item-Item:
+Computing the cosine similarity matrix...
+Done computing similarity matrix.
+Computing the cosine similarity matrix...
+Done computing similarity matrix.
+Trust (1990) 8.993195870740706
+Night Porter, The (Portiere di notte, Il) (1974) 8.991602228017534
+Daytrippers, The (1996) 8.978892697759282
+Living in Oblivion (1995) 8.973090760365785
+Melvin and Howard (1980) 8.970142500145332
+Hate (Haine, La) (1995) 8.967270202229166
+Presidio, The (1988) 8.96429313204702
+Stop Making Sense (1984) 8.954691793826552
+Color Purple, The (1985) 8.954276360003217
+Opposite of Sex, The (1998) 8.95170801390616
+Clue (1985) 8.949644625955322
+
+Evaluate User CD:
+Computing the cosine similarity matrix...
+Done computing similarity matrix.
+Computing the cosine similarity matrix...
+Done computing similarity matrix.
+HR 0.05081967213114754

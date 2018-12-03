@@ -57,14 +57,14 @@ def main():
     print(gs.best_params['rmse'])
     params = gs.best_params['rmse']
     SVDtuned = SVD(n_epochs = params['n_epochs'], lr_all = params['lr_all'], n_factors = params['n_factors'])
-    evaluator.AddAlgorithm(SVDtuned, "SVD - Tuned")
-    SVDUntuned = SVD()
-    evaluator.AddAlgorithm(SVDUntuned, "SVD - Untuned")
+    evaluator.AddAlgorithm(SVDtuned, "SVD")
+#    SVDUntuned = SVD()
+#    evaluator.AddAlgorithm(SVDUntuned, "SVD - Untuned")
     # end SVD - and replacement
 
     # SVD++
-    SVDPlusPlus = SVDpp()
-    evaluator.AddAlgorithm(SVDPlusPlus, "SVD++")
+#    SVDPlusPlus = SVDpp()
+#    evaluator.AddAlgorithm(SVDPlusPlus, "SVD++")
 
     # END SVDBakeOff code
 
@@ -101,8 +101,8 @@ class ContentKNNAlgorithm(AlgoBase):
                 otherMovieID = int(self.trainset.to_raw_iid(otherRating))
                 genreSimilarity = self.computeGenreSimilarity(thisMovieID, otherMovieID, genres)
                 yearSimilarity = self.computeYearSimilarity(thisMovieID, otherMovieID, years)
-                #mesSimilarity = self.computeMiseEnSceneSimilarity(thisMovieID, otherMovieID, mes)
-                self.similarities[thisRating, otherRating] = genreSimilarity * yearSimilarity
+                mesSimilarity = self.computeMiseEnSceneSimilarity(thisMovieID, otherMovieID, mes)
+                self.similarities[thisRating, otherRating] = genreSimilarity * yearSimilarity * mesSimilarity
                 self.similarities[otherRating, thisRating] = self.similarities[thisRating, otherRating]
         print("...done.")
         return self
