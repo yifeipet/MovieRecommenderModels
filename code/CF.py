@@ -13,7 +13,7 @@ from surprise.model_selection import LeaveOneOut
 from evaluate import RecommenderMetrics, EvaluationData
 
 class SimpleCF:
-    def __init__(self, testSubject='85', k=10):
+    def __init__(self, testSubject='75', k=10):
         self.testSubject = testSubject
         self.k = k
 

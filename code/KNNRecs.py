@@ -6,9 +6,6 @@ import random
 import math
 import numpy as np
 import heapq
-
-#sys.path.append(os.path.realpath(os.path.join(os.path.dirname(__file__), '..')))
-
 from evaluate import Evaluator
 from surprise import AlgoBase, PredictionImpossible, NormalPredictor, SVD, SVDpp, KNNBasic
 from surprise.model_selection import GridSearchCV
@@ -32,43 +29,25 @@ def main():
     evaluator.AddAlgorithm(contentKNN, "ContentKNN")
 
     print("Running User KNN:")
-    # START KNNBakeoff code:
-    # User-based KNN
     UserKNN = KNNBasic(sim_options = {'name': 'cosine', 'user_based': True})
     evaluator.AddAlgorithm(UserKNN, "User KNN")
 
     print("Running Item KNN:")
-    # Item-based KNN
     ItemKNN = KNNBasic(sim_options = {'name': 'cosine', 'user_based': False})
     evaluator.AddAlgorithm(ItemKNN, "Item KNN")
-    # END KNNBakeoff code
 
 
-    # START SVDBakeOff code:
-
-    # SVD - replacing bakeoff svd with svdtuning code:
     print("Searching for best parameters...")
     param_grid = {'n_epochs': [20, 30], 'lr_all': [0.005, 0.010], 'n_factors': [50, 100]}
     gs = GridSearchCV(SVD, param_grid, measures=['rmse', 'mae'], cv=3)
     gs.fit(evaluationData)
-    # best RMSE score
     print("Best RMSE score attained: ", gs.best_score['rmse'])
-    # combination of parameters that gave the best RMSE score
     print(gs.best_params['rmse'])
     params = gs.best_params['rmse']
     SVDtuned = SVD(n_epochs = params['n_epochs'], lr_all = params['lr_all'], n_factors = params['n_factors'])
     evaluator.AddAlgorithm(SVDtuned, "SVD")
-#    SVDUntuned = SVD()
-#    evaluator.AddAlgorithm(SVDUntuned, "SVD - Untuned")
-    # end SVD - and replacement
 
-    # SVD++
-#    SVDPlusPlus = SVDpp()
-#    evaluator.AddAlgorithm(SVDPlusPlus, "SVD++")
-
-    # END SVDBakeOff code
-
-    # Just make random recommendations
+    print("Running Random predictor as a sanity check")
     Random = NormalPredictor()
     evaluator.AddAlgorithm(Random, "Random")
 

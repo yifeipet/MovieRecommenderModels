@@ -1,0 +1,43 @@
+Estimating biases using als...
+Computing the cosine similarity matrix...
+Done computing similarity matrix.
+User-User:
+Computing the cosine similarity matrix...
+Done computing similarity matrix.
+Computing the cosine similarity matrix...
+Done computing similarity matrix.
+Dances with Wolves (1990) 3.2
+Apollo 13 (1995) 2.8
+Fargo (1996) 2.8
+Pulp Fiction (1994) 2.6
+Dumb & Dumber (Dumb and Dumber) (1994) 2.4000000000000004
+Stargate (1994) 2.2
+Shine (1996) 2.1
+Willy Wonka & the Chocolate Factory (1971) 2.0
+Star Wars: Episode VI - Return of the Jedi (1983) 2.0
+Godfather, The (1972) 2.0
+Schindler's List (1993) 1.9000000000000001
+
+Item-Item:
+Computing the cosine similarity matrix...
+Done computing similarity matrix.
+Computing the cosine similarity matrix...
+Done computing similarity matrix.
+Lenny (1974) 9.400000000000002
+Salaam Bombay! (1988) 9.400000000000002
+Passage to India, A (1984) 9.400000000000002
+Oliver Twist (1948) 9.400000000000002
+Deliver Us from Evil (2006) 9.400000000000002
+Venus (2006) 9.400000000000002
+Shop Around the Corner, The (1940) 9.400000000000002
+Song of the Little Road (Pather Panchali) (1955) 9.400000000000002
+4 Little Girls (1997) 9.400000000000002
+Bank Dick, The (1940) 9.400000000000002
+Black Widow (1987) 9.400000000000002
+
+Evaluate User CD:
+Computing the cosine similarity matrix...
+Done computing similarity matrix.
+Computing the cosine similarity matrix...
+Done computing similarity matrix.
+HR 0.05081967213114754
