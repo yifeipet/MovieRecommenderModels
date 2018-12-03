@@ -12,7 +12,7 @@ import heapq
 from evaluate import Evaluator
 from surprise import AlgoBase, PredictionImpossible, NormalPredictor, SVD, SVDpp, KNNBasic
 from surprise.model_selection import GridSearchCV
-from MovieLens import MovieLens
+from movielens import MovieLens
 
 
 def main():

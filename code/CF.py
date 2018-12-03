@@ -4,7 +4,7 @@ import os
 import sys
 sys.path.append(os.path.realpath(os.path.join(os.path.dirname(__file__), '..')))
 
-from MovieLens import MovieLens
+from movielens import MovieLens
 from surprise import KNNBasic
 import heapq
 from collections import defaultdict
