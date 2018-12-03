@@ -1,7 +1,7 @@
 executables:
 
-content based - ContentRecs.py
+CF.py (fast to run)
 
-collaborative filtering - SimpleUserCF.py and SimpleItemCF.py
+KNNRecs.py (sample output in knnoutput.txt)
 
-Matrix Factorization - 
+
