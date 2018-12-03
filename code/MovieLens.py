@@ -39,6 +39,7 @@ class MovieLens:
                     self.movieID_to_name[movieID] = movieName
                     self.name_to_movieID[movieName] = movieID
 
+        #print([x for x in ratingsDataset])
         return ratingsDataset
 
     def getUserRatings(self, user):

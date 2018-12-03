@@ -5,9 +5,8 @@ import sys
 sys.path.append(os.path.realpath(os.path.join(os.path.dirname(__file__), '..')))
 
 from MovieLens import MovieLens
-from surprise import KNNBasic
-from surprise import NormalPredictor
-from Evaluator import Evaluator
+from surprise import KNNBasic, NormalPredictor
+from evaluate import Evaluator
 
 import random
 import numpy as np
@@ -43,5 +42,4 @@ evaluator.AddAlgorithm(Random, "Random")
 
 # Fight!
 evaluator.Evaluate(False)
-
 evaluator.SampleTopNRecs(ml)

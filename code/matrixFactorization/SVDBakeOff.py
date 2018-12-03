@@ -11,36 +11,31 @@ from evaluate import Evaluator
 import random
 import numpy as np
 
-def LoadMovieLensData():
-    ml = MovieLens()
-    print("Loading movie ratings...")
-    data = ml.loadMovieLensLatestSmall()
-    print("\nComputing movie popularity ranks so we can measure novelty later...")
-    rankings = ml.getPopularityRanks()
-    return (ml, data, rankings)
 
-np.random.seed(0)
-random.seed(0)
+class SVDBakeoff:
+    def __init__(self):
+        #set seeds for repeatable results
+        np.random.seed(0)
+        random.seed(0)
+        #load function extracted into 3 steps
+        ml = MovieLens()
+        evaluationData = ml.loadMovieLensLatestSmall()
+        rankings = ml.getPopularityRanks()
+        # Construct an Evaluator to, you know, evaluate them
+        evaluator = Evaluator(evaluationData, rankings)
+        # SVD
+        svd = SVD()
+        evaluator.AddAlgorithm(svd, "SVD")
+        # SVD++
+        SVDPlusPlus = SVDpp()
+        evaluator.AddAlgorithm(SVDPlusPlus, "SVD++")
+        # Just make random recommendations
+        Random = NormalPredictor()
+        evaluator.AddAlgorithm(Random, "Random")
+        # Fight!
+        evaluator.Evaluate(False)
+        evaluator.SampleTopNRecs(ml)
 
-# Load up common data set for the recommender algorithms
-(ml, evaluationData, rankings) = LoadMovieLensData()
 
-# Construct an Evaluator to, you know, evaluate them
-evaluator = Evaluator(evaluationData, rankings)
-
-# SVD
-SVD = SVD()
-evaluator.AddAlgorithm(SVD, "SVD")
-
-# SVD++
-SVDPlusPlus = SVDpp()
-evaluator.AddAlgorithm(SVDPlusPlus, "SVD++")
-
-# Just make random recommendations
-Random = NormalPredictor()
-evaluator.AddAlgorithm(Random, "Random")
-
-# Fight!
-evaluator.Evaluate(False)
-
-evaluator.SampleTopNRecs(ml)
+if __name__ == '__main__':
+    SVDBakeoff()

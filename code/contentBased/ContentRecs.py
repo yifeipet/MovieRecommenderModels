@@ -9,7 +9,7 @@ import heapq
 sys.path.append(os.path.realpath(os.path.join(os.path.dirname(__file__), '..')))
 
 from evaluate import Evaluator
-from surprise import AlgoBase, PredictionImpossible, NormalPredictor
+from surprise import AlgoBase, PredictionImpossible, NormalPredictor, SVD, SVDpp
 from MovieLens import MovieLens
 
 
@@ -105,32 +105,41 @@ class ContentKNNAlgorithm(AlgoBase):
         return predictedRating
 
 
-def LoadMovieLensData():
+
+
+if __name__ == '__main__':
+    np.random.seed(0)
+    random.seed(0)
+
     ml = MovieLens()
     print("Loading movie ratings...")
-    data = ml.loadMovieLensLatestSmall()
+    evaluationData = ml.loadMovieLensLatestSmall()
     print("\nComputing movie popularity ranks so we can measure novelty later...")
     rankings = ml.getPopularityRanks()
-    return (ml, data, rankings)
 
-np.random.seed(0)
-random.seed(0)
+    # Construct an Evaluator to, you know, evaluate them
+    evaluator = Evaluator(evaluationData, rankings)
 
-# Load up common data set for the recommender algorithms
-(ml, evaluationData, rankings) = LoadMovieLensData()
+    contentKNN = ContentKNNAlgorithm()
+    evaluator.AddAlgorithm(contentKNN, "ContentKNN")
 
-# Construct an Evaluator to, you know, evaluate them
-evaluator = Evaluator(evaluationData, rankings)
+    # START SVDBakeOff code:
 
-contentKNN = ContentKNNAlgorithm()
-evaluator.AddAlgorithm(contentKNN, "ContentKNN")
+    # SVD
+    svd = SVD()
+    evaluator.AddAlgorithm(svd, "SVD")
+    # SVD++
+    SVDPlusPlus = SVDpp()
+    evaluator.AddAlgorithm(SVDPlusPlus, "SVD++")
 
-# Just make random recommendations
-Random = NormalPredictor()
-evaluator.AddAlgorithm(Random, "Random")
+    # END SVDBakeOff code
 
-evaluator.Evaluate(False)
+    # Just make random recommendations
+    Random = NormalPredictor()
+    evaluator.AddAlgorithm(Random, "Random")
 
-evaluator.SampleTopNRecs(ml)
+    # Compare
+    evaluator.Evaluate(False)
+    evaluator.SampleTopNRecs(ml)
 
 

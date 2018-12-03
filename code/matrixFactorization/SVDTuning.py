@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu May  3 11:11:13 2018
 
-@author: Frank
-"""
 
 from MovieLens import MovieLens
 from surprise import SVD, NormalPredictor
@@ -21,6 +17,7 @@ def LoadMovieLensData():
     rankings = ml.getPopularityRanks()
     return (ml, data, rankings)
 
+
 np.random.seed(0)
 random.seed(0)
 
@@ -31,7 +28,6 @@ print("Searching for best parameters...")
 param_grid = {'n_epochs': [20, 30], 'lr_all': [0.005, 0.010],
               'n_factors': [50, 100]}
 gs = GridSearchCV(SVD, param_grid, measures=['rmse', 'mae'], cv=3)
-
 gs.fit(evaluationData)
 
 # best RMSE score
@@ -46,7 +42,6 @@ evaluator = Evaluator(evaluationData, rankings)
 params = gs.best_params['rmse']
 SVDtuned = SVD(n_epochs = params['n_epochs'], lr_all = params['lr_all'], n_factors = params['n_factors'])
 evaluator.AddAlgorithm(SVDtuned, "SVD - Tuned")
-
 SVDUntuned = SVD()
 evaluator.AddAlgorithm(SVDUntuned, "SVD - Untuned")
 
@@ -56,5 +51,4 @@ evaluator.AddAlgorithm(Random, "Random")
 
 # Fight!
 evaluator.Evaluate(False)
-
 evaluator.SampleTopNRecs(ml)
