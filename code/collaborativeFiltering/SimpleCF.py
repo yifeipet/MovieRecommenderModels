@@ -104,4 +104,4 @@ class SimpleCF:
 
 
 if __name__ == '__main__':
-    SimpleCF()
+    SimpleCF(k=10)

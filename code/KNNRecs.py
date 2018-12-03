@@ -6,11 +6,75 @@ import random
 import math
 import numpy as np
 import heapq
-sys.path.append(os.path.realpath(os.path.join(os.path.dirname(__file__), '..')))
+
+#sys.path.append(os.path.realpath(os.path.join(os.path.dirname(__file__), '..')))
 
 from evaluate import Evaluator
-from surprise import AlgoBase, PredictionImpossible, NormalPredictor, SVD, SVDpp
+from surprise import AlgoBase, PredictionImpossible, NormalPredictor, SVD, SVDpp, KNNBasic
+from surprise.model_selection import GridSearchCV
 from MovieLens import MovieLens
+
+
+def main():
+    np.random.seed(0)
+    random.seed(0)
+
+    ml = MovieLens()
+    print("Loading movie ratings...")
+    evaluationData = ml.loadMovieLensLatestSmall()
+    print("\nComputing movie popularity ranks so we can measure novelty later...")
+    rankings = ml.getPopularityRanks()
+
+    print("Running ContentKNN:")
+    # Construct an Evaluator to, you know, evaluate them
+    evaluator = Evaluator(evaluationData, rankings)
+    contentKNN = ContentKNNAlgorithm()
+    evaluator.AddAlgorithm(contentKNN, "ContentKNN")
+
+    print("Running User KNN:")
+    # START KNNBakeoff code:
+    # User-based KNN
+    UserKNN = KNNBasic(sim_options = {'name': 'cosine', 'user_based': True})
+    evaluator.AddAlgorithm(UserKNN, "User KNN")
+
+    print("Running Item KNN:")
+    # Item-based KNN
+    ItemKNN = KNNBasic(sim_options = {'name': 'cosine', 'user_based': False})
+    evaluator.AddAlgorithm(ItemKNN, "Item KNN")
+    # END KNNBakeoff code
+
+
+    # START SVDBakeOff code:
+
+    # SVD - replacing bakeoff svd with svdtuning code:
+    print("Searching for best parameters...")
+    param_grid = {'n_epochs': [20, 30], 'lr_all': [0.005, 0.010], 'n_factors': [50, 100]}
+    gs = GridSearchCV(SVD, param_grid, measures=['rmse', 'mae'], cv=3)
+    gs.fit(evaluationData)
+    # best RMSE score
+    print("Best RMSE score attained: ", gs.best_score['rmse'])
+    # combination of parameters that gave the best RMSE score
+    print(gs.best_params['rmse'])
+    params = gs.best_params['rmse']
+    SVDtuned = SVD(n_epochs = params['n_epochs'], lr_all = params['lr_all'], n_factors = params['n_factors'])
+    evaluator.AddAlgorithm(SVDtuned, "SVD - Tuned")
+    SVDUntuned = SVD()
+    evaluator.AddAlgorithm(SVDUntuned, "SVD - Untuned")
+    # end SVD - and replacement
+
+    # SVD++
+    SVDPlusPlus = SVDpp()
+    evaluator.AddAlgorithm(SVDPlusPlus, "SVD++")
+
+    # END SVDBakeOff code
+
+    # Just make random recommendations
+    Random = NormalPredictor()
+    evaluator.AddAlgorithm(Random, "Random")
+
+    # Compare
+    evaluator.Evaluate(False)
+    evaluator.SampleTopNRecs(ml)
 
 
 class ContentKNNAlgorithm(AlgoBase):
@@ -20,19 +84,15 @@ class ContentKNNAlgorithm(AlgoBase):
 
     def fit(self, trainset):
         AlgoBase.fit(self, trainset)
-
         # Compute item similarity matrix based on content attributes
-
         # Load up genre vectors for every movie
         ml = MovieLens()
         genres = ml.getGenres()
         years = ml.getYears()
         mes = ml.getMiseEnScene()
-
         print("Computing content-based similarity matrix...")
         # Compute genre distance for every movie combination as a 2x2 matrix
         self.similarities = np.zeros((self.trainset.n_items, self.trainset.n_items))
-
         for thisRating in range(self.trainset.n_items):
             if (thisRating % 100 == 0):
                 print(thisRating, " of ", self.trainset.n_items)
@@ -44,7 +104,6 @@ class ContentKNNAlgorithm(AlgoBase):
                 #mesSimilarity = self.computeMiseEnSceneSimilarity(thisMovieID, otherMovieID, mes)
                 self.similarities[thisRating, otherRating] = genreSimilarity * yearSimilarity
                 self.similarities[otherRating, thisRating] = self.similarities[thisRating, otherRating]
-
         print("...done.")
         return self
 
@@ -80,7 +139,6 @@ class ContentKNNAlgorithm(AlgoBase):
             return 0
 
     def estimate(self, u, i):
-
         if not (self.trainset.knows_user(u) and self.trainset.knows_item(i)):
             raise PredictionImpossible('User and/or item is unkown.')
         # Build up similarity scores between this item and everything the user rated
@@ -96,50 +154,12 @@ class ContentKNNAlgorithm(AlgoBase):
             if (simScore > 0):
                 simTotal += simScore
                 weightedSum += simScore * rating
-
         if (simTotal == 0):
             raise PredictionImpossible('No neighbors')
-
         predictedRating = weightedSum / simTotal
-
         return predictedRating
 
 
-
-
 if __name__ == '__main__':
-    np.random.seed(0)
-    random.seed(0)
-
-    ml = MovieLens()
-    print("Loading movie ratings...")
-    evaluationData = ml.loadMovieLensLatestSmall()
-    print("\nComputing movie popularity ranks so we can measure novelty later...")
-    rankings = ml.getPopularityRanks()
-
-    # Construct an Evaluator to, you know, evaluate them
-    evaluator = Evaluator(evaluationData, rankings)
-
-    contentKNN = ContentKNNAlgorithm()
-    evaluator.AddAlgorithm(contentKNN, "ContentKNN")
-
-    # START SVDBakeOff code:
-
-    # SVD
-    svd = SVD()
-    evaluator.AddAlgorithm(svd, "SVD")
-    # SVD++
-    SVDPlusPlus = SVDpp()
-    evaluator.AddAlgorithm(SVDPlusPlus, "SVD++")
-
-    # END SVDBakeOff code
-
-    # Just make random recommendations
-    Random = NormalPredictor()
-    evaluator.AddAlgorithm(Random, "Random")
-
-    # Compare
-    evaluator.Evaluate(False)
-    evaluator.SampleTopNRecs(ml)
-
+    main()
 
