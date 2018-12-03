@@ -1,0 +1,324 @@
+Loading movie ratings...
+
+Computing movie popularity ranks so we can measure novelty later...
+Running ContentKNN:
+Estimating biases using als...
+Computing the cosine similarity matrix...
+Done computing similarity matrix.
+Running User KNN:
+Running Item KNN:
+Searching for best parameters...
+Best RMSE score attained:  0.8782503591974787
+{'n_epochs': 20, 'lr_all': 0.005, 'n_factors': 50}
+Running Random predictor as a sanity check
+Evaluating  ContentKNN ...
+Evaluating accuracy...
+Computing content-based similarity matrix...
+0  of  8775
+100  of  8775
+200  of  8775
+300  of  8775
+400  of  8775
+500  of  8775
+600  of  8775
+700  of  8775
+800  of  8775
+900  of  8775
+1000  of  8775
+1100  of  8775
+1200  of  8775
+1300  of  8775
+1400  of  8775
+1500  of  8775
+1600  of  8775
+1700  of  8775
+1800  of  8775
+1900  of  8775
+2000  of  8775
+2100  of  8775
+2200  of  8775
+2300  of  8775
+2400  of  8775
+2500  of  8775
+2600  of  8775
+2700  of  8775
+2800  of  8775
+2900  of  8775
+3000  of  8775
+3100  of  8775
+3200  of  8775
+3300  of  8775
+3400  of  8775
+3500  of  8775
+3600  of  8775
+3700  of  8775
+3800  of  8775
+3900  of  8775
+4000  of  8775
+4100  of  8775
+4200  of  8775
+4300  of  8775
+4400  of  8775
+4500  of  8775
+4600  of  8775
+4700  of  8775
+4800  of  8775
+4900  of  8775
+5000  of  8775
+5100  of  8775
+5200  of  8775
+5300  of  8775
+5400  of  8775
+5500  of  8775
+5600  of  8775
+5700  of  8775
+5800  of  8775
+5900  of  8775
+6000  of  8775
+6100  of  8775
+6200  of  8775
+6300  of  8775
+6400  of  8775
+6500  of  8775
+6600  of  8775
+6700  of  8775
+6800  of  8775
+6900  of  8775
+7000  of  8775
+7100  of  8775
+7200  of  8775
+7300  of  8775
+7400  of  8775
+7500  of  8775
+7600  of  8775
+7700  of  8775
+7800  of  8775
+7900  of  8775
+8000  of  8775
+8100  of  8775
+8200  of  8775
+8300  of  8775
+8400  of  8775
+8500  of  8775
+8600  of  8775
+8700  of  8775
+...done.
+Analysis complete.
+Evaluating  User KNN ...
+Evaluating accuracy...
+Computing the cosine similarity matrix...
+Done computing similarity matrix.
+Analysis complete.
+Evaluating  Item KNN ...
+Evaluating accuracy...
+Computing the cosine similarity matrix...
+Done computing similarity matrix.
+Analysis complete.
+Evaluating  SVD ...
+Evaluating accuracy...
+Analysis complete.
+Evaluating  Random ...
+Evaluating accuracy...
+Analysis complete.
+
+
+Algorithm  RMSE       MAE       
+ContentKNN 1.0133     0.7858    
+User KNN   0.9787     0.7547    
+Item KNN   0.9788     0.7610    
+SVD        0.8771     0.6732    
+Random     1.4212     1.1315    
+
+Legend:
+
+RMSE:      Root Mean Squared Error. Lower values mean better accuracy.
+MAE:       Mean Absolute Error. Lower values mean better accuracy.
+
+Using recommender  ContentKNN
+
+Building recommendation model...
+Computing content-based similarity matrix...
+0  of  9724
+100  of  9724
+200  of  9724
+300  of  9724
+400  of  9724
+500  of  9724
+600  of  9724
+700  of  9724
+800  of  9724
+900  of  9724
+1000  of  9724
+1100  of  9724
+1200  of  9724
+1300  of  9724
+1400  of  9724
+1500  of  9724
+1600  of  9724
+1700  of  9724
+1800  of  9724
+1900  of  9724
+2000  of  9724
+2100  of  9724
+2200  of  9724
+2300  of  9724
+2400  of  9724
+2500  of  9724
+2600  of  9724
+2700  of  9724
+2800  of  9724
+2900  of  9724
+3000  of  9724
+3100  of  9724
+3200  of  9724
+3300  of  9724
+3400  of  9724
+3500  of  9724
+3600  of  9724
+3700  of  9724
+3800  of  9724
+3900  of  9724
+4000  of  9724
+4100  of  9724
+4200  of  9724
+4300  of  9724
+4400  of  9724
+4500  of  9724
+4600  of  9724
+4700  of  9724
+4800  of  9724
+4900  of  9724
+5000  of  9724
+5100  of  9724
+5200  of  9724
+5300  of  9724
+5400  of  9724
+5500  of  9724
+5600  of  9724
+5700  of  9724
+5800  of  9724
+5900  of  9724
+6000  of  9724
+6100  of  9724
+6200  of  9724
+6300  of  9724
+6400  of  9724
+6500  of  9724
+6600  of  9724
+6700  of  9724
+6800  of  9724
+6900  of  9724
+7000  of  9724
+7100  of  9724
+7200  of  9724
+7300  of  9724
+7400  of  9724
+7500  of  9724
+7600  of  9724
+7700  of  9724
+7800  of  9724
+7900  of  9724
+8000  of  9724
+8100  of  9724
+8200  of  9724
+8300  of  9724
+8400  of  9724
+8500  of  9724
+8600  of  9724
+8700  of  9724
+8800  of  9724
+8900  of  9724
+9000  of  9724
+9100  of  9724
+9200  of  9724
+9300  of  9724
+9400  of  9724
+9500  of  9724
+9600  of  9724
+9700  of  9724
+...done.
+Computing recommendations...
+
+We recommend:
+Winnie the Pooh and the Blustery Day (1968) 5
+Sleeping Beauty (1959) 5
+Charlotte's Web (1973) 5
+Aristocats, The (1970) 5
+Tommy (1975) 5
+Cats Don't Dance (1997) 5
+Prince of Egypt, The (1998) 5
+Batman: Mask of the Phantasm (1993) 5
+Road to El Dorado, The (2000) 5
+Brave Little Toaster, The (1987) 5
+
+Using recommender  User KNN
+
+Building recommendation model...
+Computing the cosine similarity matrix...
+Done computing similarity matrix.
+Computing recommendations...
+
+We recommend:
+Galaxy of Terror (Quest) (1981) 5
+Alien Contamination (1980) 5
+I'm the One That I Want (2000) 5
+Lesson Faust (1994) 5
+Assignment, The (1997) 5
+Mephisto (1981) 5
+Black Mirror 5
+Dylan Moran: Monster (2004) 5
+Bill Hicks: Revelations (1993) 5
+My Sassy Girl (Yeopgijeogin geunyeo) (2001) 5
+
+Using recommender  Item KNN
+
+Building recommendation model...
+Computing the cosine similarity matrix...
+Done computing similarity matrix.
+Computing recommendations...
+
+We recommend:
+1-900 (06) (1994) 5
+Last Klezmer: Leopold Kozlowski, His Life and Music, The (1994) 5
+Single Girl, A (Fille seule, La) (1995) 5
+Hustler White (1996) 5
+Line King: The Al Hirschfeld Story, The (1996) 5
+Dear God (1996) 5
+Sunset Park (1996) 5
+Unforgettable (1996) 5
+Live Nude Girls (1995) 5
+Smiling Fish and Goat on Fire (1999) 4.666666666666667
+
+Using recommender  SVD
+
+Building recommendation model...
+Computing recommendations...
+
+We recommend:
+Young Frankenstein (1974) 3.9595215841191242
+Shaun of the Dead (2004) 3.9383134469985666
+High Noon (1952) 3.8840468381915665
+Glory (1989) 3.8812621805213627
+Boondock Saints, The (2000) 3.8655093081936416
+Philadelphia Story, The (1940) 3.851139764990922
+Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb (1964) 3.8397624598396036
+Seven Samurai (Shichinin no samurai) (1954) 3.839356880013173
+Thank You for Smoking (2006) 3.819922427177867
+Godfather, The (1972) 3.819884484590911
+
+Using recommender  Random
+
+Building recommendation model...
+Computing recommendations...
+
+We recommend:
+Clerks (1994) 5
+Mask, The (1994) 5
+Space Jam (1996) 5
+That Thing You Do! (1996) 5
+Ghost and the Darkness, The (1996) 5
+Clockwork Orange, A (1971) 5
+Fantasia (1940) 5
+Big Lebowski, The (1998) 5
+All Quiet on the Western Front (1930) 5
+Great Mouse Detective, The (1986) 5
